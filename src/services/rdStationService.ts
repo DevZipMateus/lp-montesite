@@ -7,13 +7,8 @@ const leadSchema = z.object({
   phone: z.string().trim().min(8, 'Telefone inválido').max(20, 'Telefone muito longo')
 });
 
-// Configuração do RD Station
-const RD_STATION_CONFIG = {
-  publicToken: '004614e99c43a7bca7b23af79bdcae34',
-  privateToken: 'c55d9a443010ef5a233cdbe02983be35',
-  conversionIdentifier: 'Conversão - Formulário LP MonteSite',
-  apiUrl: 'https://api.rd.services/platform/conversions'
-};
+// URL da Edge Function
+const EDGE_FUNCTION_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/rd-conversion`;
 
 export interface LeadData {
   name: string;
@@ -35,41 +30,28 @@ export async function sendConversion(data: LeadData): Promise<ConversionResponse
     // Validar dados com Zod
     const validatedData = leadSchema.parse(data);
 
-    // Montar payload da API
-    const payload = {
-      event_type: 'CONVERSION',
-      event_family: 'CDP',
-      payload: {
-        conversion_identifier: RD_STATION_CONFIG.conversionIdentifier,
-        name: validatedData.name,
-        email: validatedData.email,
-        personal_phone: validatedData.phone,
-        cf_origem: 'Landing Page MonteSite'
-      }
-    };
-
-    // Fazer requisição à API do RD Station
-    const response = await fetch(RD_STATION_CONFIG.apiUrl, {
+    // Fazer requisição à Edge Function
+    const response = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${RD_STATION_CONFIG.privateToken}`
+        'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(validatedData)
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Erro da API RD Station:', errorData);
+    const responseData = await response.json();
+
+    if (!response.ok || !responseData.success) {
+      console.error('Erro ao enviar lead:', responseData);
       
       return {
         success: false,
-        error: errorData.error_message || 'Erro ao enviar dados para o RD Station'
+        error: responseData.error || 'Erro ao enviar dados'
       };
     }
 
-    const responseData = await response.json().catch(() => ({}));
-    console.log('Lead enviado com sucesso ao RD Station:', responseData);
+    console.log('Lead enviado com sucesso:', responseData);
 
     return {
       success: true,
