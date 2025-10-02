@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navigation: React.FC = () => {
   return (
-    <header className="fixed top-0 left-0 w-full h-16 sm:h-20 md:h-24 lg:h-[100px] bg-white/50 backdrop-blur-sm z-10 flex items-center justify-center">
+    <header className="fixed top-0 left-0 w-full h-16 sm:h-20 md:h-24 lg:h-[100px] bg-white/50 backdrop-blur-sm z-50 flex items-center justify-center">
       <nav className="w-full max-w-7xl h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-32 sm:w-36 md:w-40 lg:w-44 h-auto">
           <div
