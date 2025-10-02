@@ -27,9 +27,9 @@ serve(async (req) => {
     console.log('Enviando lead para RD Station:', { email: validatedData.email });
 
     // Configuração do RD Station - API Key Pública
-    const apiKey = Deno.env.get('RD_STATION_PRIVATE_TOKEN');
+    const apiKey = Deno.env.get('RD_STATION_PUBLIC_TOKEN');
     if (!apiKey) {
-      throw new Error('RD_STATION_PRIVATE_TOKEN não configurado');
+      throw new Error('RD_STATION_PUBLIC_TOKEN não configurado');
     }
 
     // Montar payload simplificado (sem event_type e event_family)
