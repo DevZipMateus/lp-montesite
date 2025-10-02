@@ -14,6 +14,36 @@ const leadSchema = z.object({
   phone: z.string().trim().min(8).max(20)
 });
 
+// Função para obter Access Token via OAuth2
+async function getAccessToken(clientId: string, clientSecret: string): Promise<string> {
+  console.log('Obtendo access token via OAuth2...');
+  
+  const response = await fetch('https://api.rd.services/auth/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: 'client_credentials'
+    })
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Erro ao obter access token:', {
+      status: response.status,
+      body: errorText
+    });
+    throw new Error(`Falha na autenticação OAuth2: ${errorText}`);
+  }
+
+  const data = await response.json();
+  console.log('Access token obtido com sucesso');
+  return data.access_token;
+}
+
 serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -27,11 +57,16 @@ serve(async (req) => {
 
     console.log('Enviando lead para RD Station:', { email: validatedData.email });
 
-    // Configuração do RD Station - API Key Pública
-    const apiKey = Deno.env.get('RD_STATION_PUBLIC_TOKEN');
-    if (!apiKey) {
-      throw new Error('RD_STATION_PUBLIC_TOKEN não configurado');
+    // Configuração OAuth2 do RD Station
+    const clientId = Deno.env.get('RD_STATION_CLIENT_ID');
+    const clientSecret = Deno.env.get('RD_STATION_PRIVATE_TOKEN');
+    
+    if (!clientId || !clientSecret) {
+      throw new Error('Credenciais OAuth2 não configuradas');
     }
+
+    // Obter access token via OAuth2
+    const accessToken = await getAccessToken(clientId, clientSecret);
 
     // Montar payload no formato de Events (API 2.0)
     const payload = {
@@ -48,11 +83,12 @@ serve(async (req) => {
 
     console.log('Payload enviado:', JSON.stringify(payload, null, 2));
 
-    // Chamar API do RD Station Events com API Key na URL
-    const apiUrl = `https://api.rd.services/platform/events?api_key=${apiKey}`;
+    // Chamar API do RD Station Events com OAuth2
+    const apiUrl = 'https://api.rd.services/platform/events';
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
