@@ -8,36 +8,38 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <main className="w-full h-[786px] relative mt-[100px] bg-white max-md:h-auto max-md:min-h-[600px] max-md:px-5 max-md:py-[60px] max-sm:px-[15px] max-sm:py-10">
+    <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-0">
       {/* Background Image */}
       <img
         src="https://api.builder.io/api/v1/image/assets/TEMP/713647d2a3211010885421e76743211b26b65074?width=1838"
         alt=""
-        className="w-[919px] h-[1148px] shrink-0 aspect-[919/1148] absolute top-[-181px] left-[720px] max-md:w-[400px] max-md:h-[500px] max-md:-translate-x-2/4 max-md:top-[-100px] max-md:left-2/4 max-md:right-auto max-sm:w-[300px] max-sm:h-[375px] max-sm:top-[-50px]"
+        className="absolute inset-0 w-full h-full object-cover object-right sm:w-3/4 sm:right-0 sm:left-auto md:w-2/3 md:object-contain lg:w-[919px] lg:h-[1148px] lg:top-[-181px] lg:left-[720px] lg:object-fill"
         role="presentation"
       />
       
       {/* Content Card */}
       <section 
-        className="w-[584px] h-[680px] shrink-0 shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] absolute bg-white rounded-2xl left-[120px] top-[53px] max-md:w-[90%] max-md:max-w-[500px] max-md:h-auto max-md:min-h-[600px] max-md:-translate-x-2/4 max-md:box-border max-md:p-10 max-md:left-2/4 max-md:top-[100px] max-sm:w-[95%] max-sm:min-h-[550px] max-sm:px-5 max-sm:py-[30px]"
+        className="relative z-10 w-full max-w-lg mx-4 sm:max-w-xl sm:mx-6 md:max-w-2xl lg:absolute lg:w-[584px] lg:left-[120px] lg:top-[53px] lg:mx-0 shadow-lg sm:shadow-xl lg:shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] bg-white rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-0 lg:py-0 lg:h-[680px]"
         aria-labelledby="hero-heading"
       >
-        {/* Heading */}
-        <h1 
-          id="hero-heading"
-          className="w-[476px] text-[#040815] text-[40px] font-bold leading-[54.4px] tracking-[-1.2px] absolute h-[162px] left-[169px] top-[89px] max-md:w-[90%] max-md:max-w-[400px] max-md:-translate-x-2/4 max-md:text-[32px] max-md:text-center max-md:h-auto max-md:left-2/4 max-md:top-[140px] max-sm:text-[28px] max-sm:w-[95%] max-sm:top-[120px]"
-        >
-          Criação de sites sob medida para o seu negócio crescer online
-        </h1>
-        
-        {/* Subtitle */}
-        <p className="w-[476px] text-[#596780] text-[22px] font-normal leading-[33px] tracking-[-0.44px] absolute h-[66px] left-[169px] top-[274px] max-md:w-[90%] max-md:max-w-[400px] max-md:-translate-x-2/4 max-md:text-lg max-md:text-center max-md:h-auto max-md:left-2/4 max-md:top-[280px] max-sm:text-base max-sm:w-[95%] max-sm:top-[250px]">
-          Solicite um contato e descubra como podemos criar o site que sua empresa merece.
-        </p>
-        
-        {/* Contact Form */}
-        <div className="absolute left-[169px] top-[363px] max-md:-translate-x-2/4 max-md:left-2/4 max-md:top-[360px] max-sm:top-80">
-          <ContactForm onSubmit={handleFormSubmit} />
+        <div className="lg:absolute lg:left-[54px] lg:top-[89px] lg:right-[54px] flex flex-col h-full lg:justify-start">
+          {/* Heading */}
+          <h1 
+            id="hero-heading"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight leading-tight sm:leading-snug md:leading-[1.36] text-[#040815] mb-4 sm:mb-6 lg:mb-8"
+          >
+            Criação de sites sob medida para o seu negócio crescer online
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base md:text-lg lg:text-[22px] text-[#596780] leading-relaxed tracking-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+            Solicite um contato e descubra como podemos criar o site que sua empresa merece.
+          </p>
+          
+          {/* Contact Form */}
+          <div className="w-full">
+            <ContactForm onSubmit={handleFormSubmit} />
+          </div>
         </div>
       </section>
     </main>

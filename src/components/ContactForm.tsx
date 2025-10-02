@@ -69,10 +69,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="mb-4">
+      <div className="mb-3 sm:mb-4">
         <label 
           htmlFor="name"
-          className="block w-[466px] text-[#596780] text-base font-normal leading-6 tracking-[-0.32px] mb-2 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%]"
+          className="block text-[#596780] text-sm sm:text-base font-normal leading-6 tracking-tight mb-2"
         >
           Nome
         </label>
@@ -81,23 +81,23 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           id="name"
           value={formData.name}
           onChange={handleInputChange('name')}
-          className={`w-[473px] h-[46px] rounded border bg-[#F6F6F6] border-solid px-4 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%] focus:outline-none focus:ring-2 focus:ring-[#0084FF] ${
+          className={`w-full h-11 sm:h-12 rounded border bg-[#F6F6F6] border-solid px-3 sm:px-4 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#0084FF] transition-all ${
             errors.name ? 'border-red-500' : 'border-[#97A0B0]'
           }`}
           placeholder="Digite seu nome"
           aria-describedby={errors.name ? 'name-error' : undefined}
         />
         {errors.name && (
-          <span id="name-error" className="text-red-500 text-sm mt-1 block" role="alert">
+          <span id="name-error" className="text-red-500 text-xs sm:text-sm mt-1 block" role="alert">
             {errors.name}
           </span>
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="mb-3 sm:mb-4">
         <label 
           htmlFor="email"
-          className="block w-[466px] text-[#596780] text-base font-normal leading-6 tracking-[-0.32px] mb-2 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%]"
+          className="block text-[#596780] text-sm sm:text-base font-normal leading-6 tracking-tight mb-2"
         >
           Email
         </label>
@@ -106,23 +106,23 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           id="email"
           value={formData.email}
           onChange={handleInputChange('email')}
-          className={`w-[473px] h-[46px] rounded border bg-[#F6F6F6] border-solid px-4 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%] focus:outline-none focus:ring-2 focus:ring-[#0084FF] ${
+          className={`w-full h-11 sm:h-12 rounded border bg-[#F6F6F6] border-solid px-3 sm:px-4 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#0084FF] transition-all ${
             errors.email ? 'border-red-500' : 'border-[#97A0B0]'
           }`}
           placeholder="Digite seu email"
           aria-describedby={errors.email ? 'email-error' : undefined}
         />
         {errors.email && (
-          <span id="email-error" className="text-red-500 text-sm mt-1 block" role="alert">
+          <span id="email-error" className="text-red-500 text-xs sm:text-sm mt-1 block" role="alert">
             {errors.email}
           </span>
         )}
       </div>
 
-      <div className="mb-6">
+      <div className="mb-5 sm:mb-6">
         <label 
           htmlFor="phone"
-          className="block w-[466px] text-[#596780] text-base font-normal leading-6 tracking-[-0.32px] mb-2 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%]"
+          className="block text-[#596780] text-sm sm:text-base font-normal leading-6 tracking-tight mb-2"
         >
           Telefone
         </label>
@@ -131,14 +131,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           id="phone"
           value={formData.phone}
           onChange={handleInputChange('phone')}
-          className={`w-[473px] h-[46px] rounded border bg-[#F6F6F6] border-solid px-4 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%] focus:outline-none focus:ring-2 focus:ring-[#0084FF] ${
+          className={`w-full h-11 sm:h-12 rounded border bg-[#F6F6F6] border-solid px-3 sm:px-4 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#0084FF] transition-all ${
             errors.phone ? 'border-red-500' : 'border-[#97A0B0]'
           }`}
           placeholder="Digite seu telefone"
           aria-describedby={errors.phone ? 'phone-error' : undefined}
         />
         {errors.phone && (
-          <span id="phone-error" className="text-red-500 text-sm mt-1 block" role="alert">
+          <span id="phone-error" className="text-red-500 text-xs sm:text-sm mt-1 block" role="alert">
             {errors.phone}
           </span>
         )}
@@ -146,7 +146,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
       <button
         type="submit"
-        className="w-[471px] h-[52px] bg-gradient-to-r from-[#0084FF] to-[#0066CC] text-white text-center text-base font-semibold leading-6 tracking-[-0.32px] rounded-[30px] cursor-pointer transition-all duration-200 hover:from-[#0066CC] hover:to-[#0052A3] focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 max-md:w-[90%] max-md:max-w-[400px] max-sm:w-[95%]"
+        className="w-full h-12 sm:h-14 bg-gradient-to-r from-[#0084FF] to-[#0066CC] text-white text-center text-sm sm:text-base font-semibold leading-6 tracking-tight rounded-full cursor-pointer transition-all duration-200 hover:from-[#0066CC] hover:to-[#0052A3] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2"
         aria-label="Solicitar contato"
       >
         Solicitar contato
