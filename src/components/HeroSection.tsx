@@ -10,7 +10,7 @@ const HeroSection: React.FC = () => {
   return (
     <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:min-h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-8 lg:justify-start lg:items-start lg:pl-[120px] overflow-hidden">
       {/* Background Image Wrapper */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none bg-gradient-to-r from-[#1F93FF] to-[#9333EA]">
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/713647d2a3211010885421e76743211b26b65074?width=1838"
           alt=""
