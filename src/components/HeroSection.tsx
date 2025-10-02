@@ -21,20 +21,20 @@ const HeroSection: React.FC = () => {
       
       {/* Content Card */}
       <section 
-        className="relative z-10 w-full max-w-lg mx-4 sm:max-w-xl sm:mx-6 md:max-w-2xl lg:absolute lg:w-[584px] lg:left-[120px] lg:top-[53px] lg:mx-0 shadow-lg sm:shadow-xl lg:shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] bg-white rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-0 lg:py-0 lg:h-[680px]"
+        className="relative z-10 w-full max-w-lg mx-4 sm:max-w-xl sm:mx-6 md:max-w-2xl lg:absolute lg:w-[584px] lg:left-[120px] lg:top-[53px] lg:mx-0 shadow-lg sm:shadow-xl lg:shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] bg-white rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-12 lg:py-14 lg:min-h-[680px] lg:max-h-[680px] lg:overflow-y-auto"
         aria-labelledby="hero-heading"
       >
-        <div className="lg:absolute lg:left-[54px] lg:top-[89px] lg:right-[54px] flex flex-col h-full lg:justify-start">
+        <div className="flex flex-col h-full lg:justify-start max-w-[476px] mx-auto lg:mx-0">
           {/* Heading */}
           <h1 
             id="hero-heading"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight leading-tight sm:leading-snug md:leading-[1.36] text-[#040815] mb-4 sm:mb-6 lg:mb-8"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight leading-tight sm:leading-snug md:leading-[1.36] text-[#040815] mb-3 sm:mb-4 md:mb-5 lg:mb-6"
           >
             Criação de sites sob medida para o seu negócio crescer online
           </h1>
           
           {/* Subtitle */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-[22px] text-[#596780] leading-relaxed tracking-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <p className="text-sm sm:text-base md:text-lg lg:text-[22px] text-[#596780] leading-relaxed tracking-tight mb-5 sm:mb-6 md:mb-8 lg:mb-10">
             Solicite um contato e descubra como podemos criar o site que sua empresa merece.
           </p>
           

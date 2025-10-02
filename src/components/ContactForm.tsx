@@ -68,7 +68,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full max-w-full">
       <div className="mb-3 sm:mb-4">
         <label 
           htmlFor="name"
