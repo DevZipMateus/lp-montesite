@@ -33,23 +33,19 @@ serve(async (req) => {
       throw new Error('RD_STATION_PUBLIC_TOKEN não configurado');
     }
 
-    // Montar payload no formato de Events (API 2.0)
+    // Montar payload para Conversions API (usando API Key pública)
     const payload = {
-      event_type: 'CONVERSION',
-      event_family: 'CDP',
-      payload: {
-        conversion_identifier: 'Conversão - Formulário LP MonteSite',
-        name: validatedData.name,
-        email: validatedData.email,
-        personal_phone: validatedData.phone,
-        cf_origem: 'Landing Page MonteSite'
-      }
+      conversion_identifier: 'Conversão - Formulário LP MonteSite',
+      name: validatedData.name,
+      email: validatedData.email,
+      personal_phone: validatedData.phone,
+      cf_origem: 'Landing Page MonteSite'
     };
 
     console.log('Payload enviado:', JSON.stringify(payload, null, 2));
 
-    // Chamar API do RD Station Events com API Key na URL
-    const apiUrl = `https://api.rd.services/platform/events?api_key=${apiKey}`;
+    // Chamar API do RD Station Conversions com API Key pública na URL
+    const apiUrl = `https://api.rd.services/platform/conversions?api_key=${apiKey}`;
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
