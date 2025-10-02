@@ -1,10 +1,36 @@
 import React from 'react';
 import ContactForm from './ContactForm';
+import { sendConversion } from '@/services/rdStationService';
+import { toast } from 'sonner';
 
 const HeroSection: React.FC = () => {
-  const handleFormSubmit = (data: { name: string; email: string; phone: string }) => {
-    console.log('Form submitted:', data);
-    // Here you would typically send the data to your backend
+  const handleFormSubmit = async (data: { name: string; email: string; phone: string }) => {
+    try {
+      // Enviar para RD Station
+      const result = await sendConversion(data);
+      
+      if (result.success) {
+        toast.success('Lead cadastrado!', {
+          description: 'Entraremos em contato em breve.',
+          duration: 5000
+        });
+      } else {
+        toast.error('Erro ao enviar', {
+          description: result.error || 'Tente novamente em alguns instantes.',
+          duration: 5000
+        });
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      console.error('Erro ao processar formulário:', error);
+      if (error instanceof Error && !error.message.includes('RD Station')) {
+        toast.error('Erro de conexão', {
+          description: 'Verifique sua internet e tente novamente.',
+          duration: 5000
+        });
+      }
+      throw error;
+    }
   };
 
   return (

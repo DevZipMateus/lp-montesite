@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -7,7 +9,7 @@ interface FormData {
 }
 
 interface ContactFormProps {
-  onSubmit?: (data: FormData) => void;
+  onSubmit?: (data: FormData) => Promise<void>;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
@@ -18,6 +20,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {};
@@ -40,15 +43,25 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
-      onSubmit?.(formData);
-      // Reset form after successful submission
-      setFormData({ name: '', email: '', phone: '' });
-      setErrors({});
-      alert('Formulário enviado com sucesso! Entraremos em contato em breve.');
+      setIsSubmitting(true);
+      
+      try {
+        // Chama a função onSubmit que virá do HeroSection
+        await onSubmit?.(formData);
+        
+        // Reset form after successful submission
+        setFormData({ name: '', email: '', phone: '' });
+        setErrors({});
+      } catch (error) {
+        // Erros serão tratados no HeroSection
+        console.error('Erro ao submeter formulário:', error);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -146,10 +159,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
       <button
         type="submit"
-        className="w-full h-12 sm:h-14 bg-gradient-to-r from-[#0084FF] to-[#0066CC] text-white text-center text-sm sm:text-base font-semibold leading-6 tracking-tight rounded-full cursor-pointer transition-all duration-200 hover:from-[#0066CC] hover:to-[#0052A3] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2"
+        disabled={isSubmitting}
+        className="w-full h-12 sm:h-14 bg-gradient-to-r from-[#0084FF] to-[#0066CC] text-white text-center text-sm sm:text-base font-semibold leading-6 tracking-tight rounded-full cursor-pointer transition-all duration-200 hover:from-[#0066CC] hover:to-[#0052A3] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-[#0084FF] disabled:hover:to-[#0066CC] flex items-center justify-center gap-2"
         aria-label="Solicitar contato"
       >
-        Solicitar contato
+        {isSubmitting ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Enviando...
+          </>
+        ) : (
+          'Solicitar contato'
+        )}
       </button>
     </form>
   );
