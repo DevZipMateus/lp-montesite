@@ -26,38 +26,47 @@ serve(async (req) => {
 
     console.log('Enviando lead para RD Station:', { email: validatedData.email });
 
-    // Configuração do RD Station
-    const privateToken = Deno.env.get('RD_STATION_PRIVATE_TOKEN');
-    if (!privateToken) {
+    // Configuração do RD Station - API Key Pública
+    const apiKey = Deno.env.get('RD_STATION_PRIVATE_TOKEN');
+    if (!apiKey) {
       throw new Error('RD_STATION_PRIVATE_TOKEN não configurado');
     }
 
-    // Montar payload da API
+    // Montar payload simplificado (sem event_type e event_family)
     const payload = {
-      event_type: 'CONVERSION',
-      event_family: 'CDP',
-      payload: {
-        conversion_identifier: 'Conversão - Formulário LP MonteSite',
-        name: validatedData.name,
-        email: validatedData.email,
-        personal_phone: validatedData.phone,
-        cf_origem: 'Landing Page MonteSite'
-      }
+      conversion_identifier: 'Conversão - Formulário LP MonteSite',
+      name: validatedData.name,
+      email: validatedData.email,
+      personal_phone: validatedData.phone,
+      cf_origem: 'Landing Page MonteSite'
     };
 
-    // Chamar API do RD Station
-    const response = await fetch('https://api.rd.services/platform/conversions', {
+    console.log('Payload enviado:', JSON.stringify(payload, null, 2));
+
+    // Chamar API do RD Station com API Key na URL
+    const apiUrl = `https://api.rd.services/platform/conversions?api_key=${apiKey}`;
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${privateToken}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Erro da API RD Station:', response.status, errorData);
+      const responseText = await response.text();
+      console.error('Erro da API RD Station:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: responseText
+      });
+      
+      let errorData;
+      try {
+        errorData = JSON.parse(responseText);
+      } catch {
+        errorData = { error_message: responseText };
+      }
       
       return new Response(
         JSON.stringify({
@@ -72,7 +81,10 @@ serve(async (req) => {
     }
 
     const responseData = await response.json().catch(() => ({}));
-    console.log('Lead enviado com sucesso:', responseData);
+    console.log('Lead enviado com sucesso:', {
+      status: response.status,
+      data: responseData
+    });
 
     return new Response(
       JSON.stringify({
