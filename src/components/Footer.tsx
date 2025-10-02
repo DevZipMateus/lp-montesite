@@ -1,16 +1,6 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
-  const handlePrivacyClick = () => {
-    // Handle privacy policy navigation
-    console.log('Privacy policy clicked');
-  };
-
-  const handleTermsClick = () => {
-    // Handle terms of use navigation
-    console.log('Terms of use clicked');
-  };
-
   return (
     <footer className="w-full bg-white py-8 sm:py-12 md:py-16 lg:py-[120px]" role="contentinfo">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:max-w-7xl lg:mx-auto lg:px-[120px]">
@@ -61,24 +51,28 @@ const Footer: React.FC = () => {
           className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6 md:gap-8 mb-6 sm:mb-8"
           aria-label="Footer navigation"
         >
-          <button
-            onClick={handlePrivacyClick}
+          <a
+            href="https://montesite.com.br/termos/Termos%20de%20Uso%20do%20Servi%C3%A7o%20de%20Cria%C3%A7%C3%A3o%20e%20Hospedagem%20de%20Sites.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1"
           >
             Política de privacidade
-          </button>
+          </a>
           <span 
             className="hidden sm:inline text-[#1A202C] text-lg font-normal"
             aria-hidden="true"
           >
             |
           </span>
-          <button
-            onClick={handleTermsClick}
+          <a
+            href="https://egestor.com.br/politica_de_privacidade.php"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1"
           >
             Termos de uso
-          </button>
+          </a>
         </nav>
         
         {/* Copyright */}
