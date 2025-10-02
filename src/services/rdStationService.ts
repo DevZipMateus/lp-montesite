@@ -52,7 +52,8 @@ export async function sendConversion(data: LeadData): Promise<ConversionResponse
     const response = await fetch(RD_STATION_CONFIG.apiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RD_STATION_CONFIG.privateToken}`
       },
       body: JSON.stringify(payload)
     });
