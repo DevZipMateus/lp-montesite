@@ -78,7 +78,7 @@ serve(async (req) => {
 
     // Configuração OAuth2 do RD Station
     const clientId = Deno.env.get('RD_STATION_CLIENT_ID');
-    const clientSecret = Deno.env.get('RD_STATION_PRIVATE_TOKEN');
+    const clientSecret = Deno.env.get('RD_STATION_PRIVATE_TOKEN_2');
     
     if (!clientId || !clientSecret) {
       throw new Error('Credenciais OAuth2 não configuradas');
