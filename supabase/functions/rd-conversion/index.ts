@@ -4,6 +4,7 @@ import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
 // Schema de validação
@@ -32,19 +33,23 @@ serve(async (req) => {
       throw new Error('RD_STATION_PUBLIC_TOKEN não configurado');
     }
 
-    // Montar payload simplificado (sem event_type e event_family)
+    // Montar payload no formato de Events (API 2.0)
     const payload = {
-      conversion_identifier: 'Conversão - Formulário LP MonteSite',
-      name: validatedData.name,
-      email: validatedData.email,
-      personal_phone: validatedData.phone,
-      cf_origem: 'Landing Page MonteSite'
+      event_type: 'CONVERSION',
+      event_family: 'CDP',
+      payload: {
+        conversion_identifier: 'Conversão - Formulário LP MonteSite',
+        name: validatedData.name,
+        email: validatedData.email,
+        personal_phone: validatedData.phone,
+        cf_origem: 'Landing Page MonteSite'
+      }
     };
 
     console.log('Payload enviado:', JSON.stringify(payload, null, 2));
 
-    // Chamar API do RD Station com API Key na URL
-    const apiUrl = `https://api.rd.services/platform/conversions?api_key=${apiKey}`;
+    // Chamar API do RD Station Events com API Key na URL
+    const apiUrl = `https://api.rd.services/platform/events?api_key=${apiKey}`;
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -62,16 +67,25 @@ serve(async (req) => {
       });
       
       let errorData;
+      let errorMessage = 'Erro ao enviar dados para o RD Station';
       try {
         errorData = JSON.parse(responseText);
+        // Concatenar múltiplos erros se existirem
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          errorMessage = errorData.errors
+            .map((e: any) => `${e.path}: ${e.error_message}`)
+            .join('; ');
+        } else if (errorData.error_message) {
+          errorMessage = errorData.error_message;
+        }
       } catch {
-        errorData = { error_message: responseText };
+        errorMessage = responseText || errorMessage;
       }
       
       return new Response(
         JSON.stringify({
           success: false,
-          error: errorData.error_message || 'Erro ao enviar dados para o RD Station'
+          error: errorMessage
         }),
         { 
           status: response.status,
