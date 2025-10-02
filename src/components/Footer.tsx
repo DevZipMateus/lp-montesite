@@ -1,8 +1,6 @@
 import React from 'react';
-
 const Footer: React.FC = () => {
-  return (
-    <footer className="w-full bg-white py-8 sm:py-12 md:py-16 lg:py-[120px]" role="contentinfo">
+  return <footer className="w-full bg-white py-8 sm:py-12 md:py-16 lg:py-[120px]" role="contentinfo">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:max-w-7xl lg:mx-auto lg:px-[120px]">
         {/* Main Content */}
         <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-[auto_1fr] lg:gap-16 mb-8 sm:mb-10 md:mb-12">
@@ -11,9 +9,8 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-6 sm:gap-8">
             {/* Logo */}
             <div className="w-32 sm:w-36 md:w-40 lg:w-44">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: `<svg width="181" height="30" viewBox="0 0 181 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+              <div dangerouslySetInnerHTML={{
+              __html: `<svg width="181" height="30" viewBox="0 0 181 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
                     <path d="M0 1.59909H7.14842L14.6984 20.4055H15.0197L22.5697 1.59909H29.7182V29.59H24.0958V11.3713H23.8682L16.7734 29.4533H12.9448L5.84993 11.303H5.62236V29.59H0V1.59909Z" fill="#0084FF"/>
                     <path d="M43.0362 30C40.9568 30 39.1585 29.549 37.6414 28.6469C36.1332 27.7358 34.9685 26.4692 34.1475 24.8474C33.3264 23.2164 32.9159 21.3257 32.9159 19.1754C32.9159 17.0068 33.3264 15.1116 34.1475 13.4897C34.9685 11.8588 36.1332 10.5923 37.6414 9.6902C39.1585 8.77904 40.9568 8.32346 43.0362 8.32346C45.1155 8.32346 46.9093 8.77904 48.4176 9.6902C49.9347 10.5923 51.1038 11.8588 51.9248 13.4897C52.7459 15.1116 53.1564 17.0068 53.1564 19.1754C53.1564 21.3257 52.7459 23.2164 51.9248 24.8474C51.1038 26.4692 49.9347 27.7358 48.4176 28.6469C46.9093 29.549 45.1155 30 43.0362 30ZM43.0629 25.4897C44.0089 25.4897 44.7987 25.2164 45.4324 24.6697C46.066 24.1139 46.5434 23.3576 46.8647 22.4009C47.1949 21.4442 47.36 20.3554 47.36 19.1344C47.36 17.9134 47.1949 16.8246 46.8647 15.8679C46.5434 14.9112 46.066 14.1549 45.4324 13.5991C44.7987 13.0433 44.0089 12.7654 43.0629 12.7654C42.108 12.7654 41.3048 13.0433 40.6533 13.5991C40.0108 14.1549 39.5244 14.9112 39.1942 15.8679C38.8729 16.8246 38.7123 17.9134 38.7123 19.1344C38.7123 20.3554 38.8729 21.4442 39.1942 22.4009C39.5244 23.3576 40.0108 24.1139 40.6533 24.6697C41.3048 25.2164 42.108 25.4897 43.0629 25.4897Z" fill="#0084FF"/>
                     <path d="M61.9263 17.4533V29.59H56.2236V8.59681H61.6586V12.3007H61.8995C62.3547 11.0797 63.1177 10.1139 64.1886 9.40319C65.2596 8.68337 66.5581 8.32346 68.0841 8.32346C69.512 8.32346 70.757 8.64237 71.819 9.28018C72.881 9.918 73.7065 10.8292 74.2955 12.0137C74.8845 13.1891 75.179 14.5923 75.179 16.2232V29.59H69.4763V17.262C69.4853 15.9772 69.164 14.9749 68.5125 14.2551C67.861 13.5262 66.9641 13.1617 65.8218 13.1617C65.0543 13.1617 64.376 13.3303 63.787 13.6674C63.2069 14.0046 62.7518 14.4966 62.4216 15.1435C62.1003 15.7813 61.9352 16.5513 61.9263 17.4533Z" fill="#0084FF"/>
@@ -24,8 +21,7 @@ const Footer: React.FC = () => {
                     <path d="M159.339 8.59681V12.9704H146.956V8.59681H159.339ZM149.767 3.5672H155.47V23.139C155.47 23.6765 155.55 24.0957 155.711 24.3964C155.872 24.6879 156.095 24.8929 156.38 25.0114C156.675 25.1298 157.014 25.1891 157.398 25.1891C157.665 25.1891 157.933 25.1663 158.201 25.1207C158.469 25.0661 158.674 25.0251 158.817 24.9977L159.714 29.3303C159.428 29.4214 159.026 29.5262 158.509 29.6446C157.991 29.7722 157.362 29.8497 156.621 29.877C155.247 29.9317 154.042 29.7449 153.007 29.3166C151.981 28.8884 151.182 28.2232 150.611 27.3212C150.04 26.4191 149.759 25.2802 149.767 23.9043V3.5672Z" fill="black"/>
                     <path d="M171.562 30C169.447 30 167.627 29.5626 166.101 28.6879C164.584 27.8041 163.415 26.5558 162.593 24.9431C161.772 23.3212 161.362 21.4032 161.362 19.1891C161.362 17.0296 161.772 15.1344 162.593 13.5034C163.415 11.8724 164.57 10.6014 166.061 9.6902C167.56 8.77904 169.318 8.32346 171.335 8.32346C172.691 8.32346 173.954 8.5467 175.123 8.99317C176.301 9.43052 177.328 10.0911 178.202 10.9749C179.086 11.8588 179.773 12.9704 180.264 14.3098C180.755 15.6401 181 17.1982 181 18.9841V20.5831H163.638V16.9749H175.632C175.632 16.1367 175.454 15.3941 175.097 14.7472C174.74 14.1002 174.244 13.5945 173.611 13.2301C172.986 12.8565 172.259 12.6697 171.429 12.6697C170.563 12.6697 169.795 12.8747 169.126 13.2847C168.466 13.6856 167.948 14.2278 167.573 14.9112C167.198 15.5854 167.007 16.3371 166.998 17.1663V20.5968C166.998 21.6355 167.185 22.533 167.56 23.2893C167.944 24.0456 168.484 24.6287 169.18 25.0387C169.876 25.4487 170.701 25.6538 171.656 25.6538C172.29 25.6538 172.87 25.5626 173.396 25.3804C173.923 25.1982 174.374 24.9248 174.748 24.5604C175.123 24.1959 175.409 23.7494 175.605 23.221L180.88 23.5763C180.612 24.8702 180.063 26 179.233 26.9658C178.412 27.9226 177.35 28.6697 176.047 29.2073C174.753 29.7358 173.258 30 171.562 30Z" fill="black"/>
                   </svg>`
-                }}
-              />
+            }} />
             </div>
             
             {/* CNPJ */}
@@ -37,7 +33,7 @@ const Footer: React.FC = () => {
           {/* Features Text */}
           <div className="text-[#596780] text-sm sm:text-base font-normal leading-relaxed tracking-tight space-y-2 md:justify-self-end">
             <p>🔒 Contrate com tranquilidade</p>
-            <p>✅ Prazo de entrega de até 7 dias úteis</p>
+            
             <p>✅ Suporte humanizado via WhatsApp</p>
             <p>✅ Site Seguro e Estável</p>
           </div>
@@ -47,30 +43,14 @@ const Footer: React.FC = () => {
         <hr className="border-t border-[#CEBEFE] my-8 sm:my-10 md:my-12" />
         
         {/* Privacy & Terms Links */}
-        <nav 
-          className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6 md:gap-8 mb-6 sm:mb-8"
-          aria-label="Footer navigation"
-        >
-          <a
-            href="https://montesite.com.br/termos/Termos%20de%20Uso%20do%20Servi%C3%A7o%20de%20Cria%C3%A7%C3%A3o%20e%20Hospedagem%20de%20Sites.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1"
-          >
+        <nav className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6 md:gap-8 mb-6 sm:mb-8" aria-label="Footer navigation">
+          <a href="https://montesite.com.br/termos/Termos%20de%20Uso%20do%20Servi%C3%A7o%20de%20Cria%C3%A7%C3%A3o%20e%20Hospedagem%20de%20Sites.pdf" target="_blank" rel="noopener noreferrer" className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1">
             Política de privacidade
           </a>
-          <span 
-            className="hidden sm:inline text-[#1A202C] text-lg font-normal"
-            aria-hidden="true"
-          >
+          <span className="hidden sm:inline text-[#1A202C] text-lg font-normal" aria-hidden="true">
             |
           </span>
-          <a
-            href="https://egestor.com.br/politica_de_privacidade.php"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1"
-          >
+          <a href="https://egestor.com.br/politica_de_privacidade.php" target="_blank" rel="noopener noreferrer" className="text-[#1A202C] text-base sm:text-lg font-semibold leading-relaxed tracking-tight cursor-pointer hover:text-[#0084FF] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#0084FF] focus:ring-offset-2 rounded px-2 py-1">
             Termos de uso
           </a>
         </nav>
@@ -80,8 +60,6 @@ const Footer: React.FC = () => {
           © 2025 MonteSite. Todos os direitos reservados.
         </p>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
