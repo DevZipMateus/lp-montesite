@@ -8,14 +8,16 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-0">
-      {/* Background Image */}
-      <img
-        src="https://api.builder.io/api/v1/image/assets/TEMP/713647d2a3211010885421e76743211b26b65074?width=1838"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-right sm:w-3/4 sm:right-0 sm:left-auto md:w-2/3 md:object-contain lg:w-[919px] lg:h-[1148px] lg:top-[-181px] lg:left-[720px] lg:object-fill"
-        role="presentation"
-      />
+    <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:min-h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-0 overflow-hidden">
+      {/* Background Image Wrapper */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src="https://api.builder.io/api/v1/image/assets/TEMP/713647d2a3211010885421e76743211b26b65074?width=1838"
+          alt=""
+          className="absolute w-full h-full object-cover object-right sm:w-3/4 sm:right-0 sm:left-auto sm:object-contain md:w-2/3 lg:w-[60%] lg:max-w-[920px] lg:h-full lg:max-h-[900px] lg:right-0 lg:top-0 lg:object-cover"
+          role="presentation"
+        />
+      </div>
       
       {/* Content Card */}
       <section 
