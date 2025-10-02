@@ -8,7 +8,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:min-h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-0 overflow-hidden">
+    <main className="w-full min-h-screen sm:min-h-[600px] md:min-h-[700px] lg:min-h-[786px] relative mt-16 sm:mt-20 md:mt-24 lg:mt-[100px] bg-white flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-16 overflow-hidden">
       {/* Background Image Wrapper */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
       
       {/* Content Card */}
       <section 
-        className="relative z-10 w-full max-w-lg mx-4 sm:max-w-xl sm:mx-6 md:max-w-2xl lg:absolute lg:w-[584px] lg:left-[120px] lg:top-[53px] lg:mx-0 shadow-lg sm:shadow-xl lg:shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] bg-white rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-12 lg:py-14 lg:min-h-[680px] lg:max-h-[680px] lg:overflow-y-auto"
+        className="relative z-10 w-full max-w-lg mx-4 sm:max-w-xl sm:mx-6 md:max-w-2xl lg:absolute lg:w-[584px] lg:left-[120px] lg:top-16 lg:mx-0 shadow-lg sm:shadow-xl lg:shadow-[4px_4px_20px_0_rgba(0,132,255,0.30)] bg-white rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-12 lg:py-14 lg:min-h-[680px]"
         aria-labelledby="hero-heading"
       >
         <div className="flex flex-col h-full lg:justify-start max-w-[476px] mx-auto lg:mx-0">
