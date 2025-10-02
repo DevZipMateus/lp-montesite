@@ -18,30 +18,49 @@ const leadSchema = z.object({
 async function getAccessToken(clientId: string, clientSecret: string): Promise<string> {
   console.log('Obtendo access token via OAuth2...');
   
-  const response = await fetch('https://api.rd.services/auth/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      grant_type: 'client_credentials'
-    })
+  // Criar body no formato x-www-form-urlencoded
+  const body = new URLSearchParams({
+    client_id: clientId,
+    client_secret: clientSecret,
+    grant_type: 'client_credentials'
   });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error('Erro ao obter access token:', {
-      status: response.status,
-      body: errorText
+  
+  // Implementar retry para 5xx (502 intermitente do RD)
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const response = await fetch('https://api.rd.services/auth/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: body
     });
-    throw new Error(`Falha na autenticação OAuth2: ${errorText}`);
-  }
 
-  const data = await response.json();
-  console.log('Access token obtido com sucesso');
-  return data.access_token;
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Access token obtido com sucesso');
+      return data.access_token;
+    }
+
+    const errorText = await response.text();
+    console.error(`Falha ao obter token (tentativa ${attempt}/3):`, {
+      status: response.status,
+      body: errorText.substring(0, 200) // Limitar log
+    });
+
+    // Retry apenas em 5xx
+    if (response.status >= 500 && attempt < 3) {
+      const delay = attempt === 1 ? 250 : 750;
+      console.log(`Aguardando ${delay}ms antes de tentar novamente...`);
+      await new Promise(r => setTimeout(r, delay));
+      continue;
+    }
+
+    // Falha definitiva
+    throw new Error(`Falha na autenticação OAuth2 (${response.status})`);
+  }
+  
+  throw new Error('Falha na autenticação OAuth2 após retries');
 }
 
 serve(async (req) => {
